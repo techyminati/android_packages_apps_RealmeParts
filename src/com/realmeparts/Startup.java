@@ -78,6 +78,7 @@ public class Startup extends BroadcastReceiver {
         if (enabled) {
             Utils.startService(context, HBMService.class);
         }
+        Utils.startService(context, ChargingCoolDownService.class);
     }
 
     private boolean hasRestoredTunable(Context context) {
