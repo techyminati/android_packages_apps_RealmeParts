@@ -48,11 +48,11 @@ public class DeviceSettings extends PreferenceFragment
     public static final String KEY_HBM_SWITCH = "hbm";
     public static final String KEY_DC_SWITCH = "dc";
     public static final String KEY_OTG_SWITCH = "otg";
-    public static final String KEY_GAME_SWITCH = "game";
+    public static final String KEY_PERF_PROFILE = "perf_profile";
+    public static final String PERF_PROFILE_SYSTEM_PROPERTY = "persist.perf_profile";
     public static final String KEY_CHARGING_SWITCH = "smart_charging";
     public static final String KEY_CHARGING_SPEED = "charging_speed";
     public static final String KEY_RESET_STATS = "reset_stats";
-    public static final String KEY_DND_SWITCH = "dnd";
     public static final String KEY_DT2W_SWITCH = "dt2w";
     public static final String KEY_CABC = "cabc";
     public static final String CABC_SYSTEM_PROPERTY = "persist.cabc_profile";
@@ -72,7 +72,6 @@ public class DeviceSettings extends PreferenceFragment
     public static SeekBarPreference mSeekBarPreference;
     public static DisplayManager mDisplayManager;
     private static NotificationManager mNotificationManager;
-    public TwoStatePreference mDNDSwitch;
     public PreferenceCategory mPreferenceCategory;
     private TwoStatePreference mDCModeSwitch;
     private TwoStatePreference mSRGBModeSwitch;
@@ -86,6 +85,7 @@ public class DeviceSettings extends PreferenceFragment
     private boolean HBM_DeviceMatched;
     private boolean sRGB_DeviceMatched;
     private SecureSettingListPreference mCABC;
+    private SecureSettingListPreference mPerfProfile;
 
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
@@ -114,15 +114,6 @@ public class DeviceSettings extends PreferenceFragment
         mOTGModeSwitch.setEnabled(OTGModeSwitch.isSupported());
         mOTGModeSwitch.setChecked(OTGModeSwitch.isCurrentlyEnabled(this.getContext()));
         mOTGModeSwitch.setOnPreferenceChangeListener(new OTGModeSwitch());
-
-        mGameModeSwitch = findPreference(KEY_GAME_SWITCH);
-        mGameModeSwitch.setEnabled(GameModeSwitch.isSupported());
-        mGameModeSwitch.setChecked(GameModeSwitch.isCurrentlyEnabled(this.getContext()));
-        mGameModeSwitch.setOnPreferenceChangeListener(new GameModeSwitch(getContext()));
-
-        mDNDSwitch = findPreference(KEY_DND_SWITCH);
-        mDNDSwitch.setChecked(prefs.getBoolean(KEY_DND_SWITCH, false));
-        mDNDSwitch.setOnPreferenceChangeListener(this);
 
         mSmartChargingSwitch = findPreference(KEY_CHARGING_SWITCH);
         mSmartChargingSwitch.setChecked(prefs.getBoolean(KEY_CHARGING_SWITCH, false));
@@ -161,6 +152,11 @@ public class DeviceSettings extends PreferenceFragment
         mCABC.setValue(Utils.getStringProp(CABC_SYSTEM_PROPERTY, "0"));
         mCABC.setSummary(mCABC.getEntry());
         mCABC.setOnPreferenceChangeListener(this);
+
+        mPerfProfile = (SecureSettingListPreference) findPreference(KEY_PERF_PROFILE);
+        mPerfProfile.setValue(Utils.getStringProp(PERF_PROFILE_SYSTEM_PROPERTY, "0"));
+        mPerfProfile.setSummary(mPerfProfile.getEntry());
+        mPerfProfile.setOnPreferenceChangeListener(this);
 
         mDT2WModeSwitch = (TwoStatePreference) findPreference(KEY_DT2W_SWITCH);
         mDT2WModeSwitch.setEnabled(DT2WModeSwitch.isSupported());
@@ -220,6 +216,12 @@ public class DeviceSettings extends PreferenceFragment
             mCABC.setValue((String) newValue);
             mCABC.setSummary(mCABC.getEntry());
             Utils.setStringProp(CABC_SYSTEM_PROPERTY, (String) newValue);
+        }
+
+        if (preference == mPerfProfile) {
+            mPerfProfile.setValue((String) newValue);
+            mPerfProfile.setSummary(mPerfProfile.getEntry());
+            Utils.setStringProp(PERF_PROFILE_SYSTEM_PROPERTY, (String) newValue);
         }
         return true;
     }
