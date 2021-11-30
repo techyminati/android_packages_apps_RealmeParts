@@ -1,6 +1,7 @@
 
 on boot
     chown system system /sys/class/power_supply/usb/otg_switch
+    chown system system /sys/kernel/oppo_display/hbm
 
 on boot
     # CABC
