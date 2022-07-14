@@ -55,7 +55,7 @@ $(call inherit-product, packages/apps/RealmeParts/parts.mk)
 If your device supports CABC feature (Check compability in **Features** section), you need to include an additional `.rc` file to enable it's support. You can do it by including the following lines in your device's makefile:
 ```
 PRODUCT_COPY_FILES += \
-    packages/apps/RealmeParts/init/cabc.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/cabc.rc
+    packages/apps/RealmeParts/init/parts.rc:$(TARGET_COPY_OUT_VENDOR)/etc/init/parts.rc
 ```
 ## Development
 RealmeParts is licensed and distributed under **The GNU General Public License v3.0**. 
