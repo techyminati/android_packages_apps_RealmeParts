@@ -1,26 +1,35 @@
-
 on boot
-    chown system system /sys/class/power_supply/usb/otg_switch
-    chown system system /sys/kernel/oplus_display/hbm
-    chmod 0666 /sys/kernel/oplus_display/hbm
-
-on boot
+    chown system system /sys/devices/virtual/oplus_chg/usb/otg_switch
+    chown system system /sys/devices/virtual/oplus_chg/battery/mmi_charging_enable
+	
     # CABC
-    chown system system /sys/kernel/oplus_display/cabc
-    chmod 0644 /sys/kernel/oplus_display/cabc
+    chown system system /sys/kernel/oplus_display/LCM_CABC
+    chmod 0644 /sys/kernel/oplus_display/LCM_CABC
+	
+    # Touchpanel
+    chown system system /proc/touchpanel/oplus_tp_limit_enable
+    write /proc/touchpanel/oplus_tp_limit_enable 0
+    chown system system /proc/touchpanel/oplus_tp_direction
+    chown system system /proc/touchpanel/game_switch_enable
+	
+    # HBM
+    chown system system /sys/kernel/oplus_display/hbm
+	
+    # DC Mode
+    chown system system /sys/kernel/oplus_display/dimlayer_bl_en
 
     # CABC off
 on property:persist.cabc_profile=0
-    write /sys/kernel/oplus_display/cabc 0
+    write /sys/kernel/oplus_display/LCM_CABC 0
 
     # CABC on
 on property:persist.cabc_profile=1
-    write /sys/kernel/oplus_display/cabc 1
+    write /sys/kernel/oplus_display/LCM_CABC 1
 
     # CABC balanced
 on property:persist.cabc_profile=2
-    write /sys/kernel/oplus_display/cabc 2
+    write /sys/kernel/oplus_display/LCM_CABC 2
 
     # CABC aggressive
 on property:persist.cabc_profile=3
-    write /sys/kernel/oplus_display/cabc 3
+    write /sys/kernel/oplus_display/LCM_CABC 3

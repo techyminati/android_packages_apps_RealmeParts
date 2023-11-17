@@ -25,7 +25,7 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 
 public class SRGBModeSwitch implements OnPreferenceChangeListener {
 
-    private static final String FILE = "/sys/kernel/oppo_display/seed";
+    private static final String FILE = "/sys/kernel/oplus_display/seed";
 
     public static String getFile() {
         if (Utils.fileWritable(FILE)) {

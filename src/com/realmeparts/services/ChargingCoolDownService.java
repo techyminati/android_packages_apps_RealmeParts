@@ -32,7 +32,7 @@ public class ChargingCoolDownService extends Service {
     private static final boolean DEBUG = false;
     private static final String TAG = "ChargingCoolDownService";
 
-    private static final String COOL_DOWN_PATH = "/sys/class/power_supply/battery/cool_down";
+    private static final String COOL_DOWN_PATH = "/sys/devices/virtual/oplus_chg/battery/cool_down";
     private static final String TEMPERATURE_PATH = "/sys/class/power_supply/battery/temp";
     private static final double COOL_DOWN_START_THRESHOLD = 40.5; // degree C
     private static final double COOL_DOWN_STOP_THRESHOLD = 39.0; // degree C
