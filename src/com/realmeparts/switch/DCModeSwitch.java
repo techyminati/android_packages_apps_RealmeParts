@@ -24,7 +24,7 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 
 public class DCModeSwitch implements OnPreferenceChangeListener {
 
-    private static final String FILE = "/sys/kernel/oppo_display/dimlayer_bl_en";
+    private static final String FILE = "/sys/kernel/oplus_display/dimlayer_bl_en";
 
     public static String getFile() {
         if (Utils.fileWritable(FILE)) {

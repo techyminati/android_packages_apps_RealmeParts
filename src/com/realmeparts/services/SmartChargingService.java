@@ -38,7 +38,7 @@ public class SmartChargingService extends Service {
     private static final boolean resetBatteryStats = false;
     public static String cool_down = "/sys/class/power_supply/battery/cool_down";
     public static String current = "/sys/class/power_supply/battery/current_now";
-    public static String mmi_charging_enable = "/sys/class/power_supply/battery/mmi_charging_enable";
+    public static String mmi_charging_enable = "/sys/devices/virtual/oplus_chg/battery/mmi_charging_enable";
     public static String battery_capacity = "/sys/class/power_supply/battery/capacity";
     public static String battery_temperature = "/sys/class/power_supply/battery/temp";
     private static Notification notification;

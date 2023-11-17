@@ -28,7 +28,7 @@ import androidx.preference.Preference.OnPreferenceChangeListener;
 
 public class HBMModeSwitch implements OnPreferenceChangeListener {
 
-    private static final String FILE = "/sys/kernel/oppo_display/hbm";
+    private static final String FILE = "/sys/kernel/oplus_display/hbm";
     private static Context mContext;
 
     public HBMModeSwitch(Context context) {
